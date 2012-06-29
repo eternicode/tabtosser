@@ -1,0 +1,5 @@
+# PIP requirements
+# python 2.6+
+
+# Core framework
+flask==0.8
