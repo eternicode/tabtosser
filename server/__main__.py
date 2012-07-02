@@ -11,4 +11,4 @@ if __name__ == "__main__":
 
     from . import app
     from . import api, web # Initialize views
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')

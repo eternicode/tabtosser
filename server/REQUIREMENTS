@@ -3,3 +3,6 @@
 
 # Core framework
 flask==0.8
+
+# Utils
+yuicompressor==2.4.7
