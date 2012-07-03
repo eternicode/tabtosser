@@ -43,7 +43,7 @@ function get_locations(){
 
 function Location(id){
     this.id = id;
-    this.url = settings.api+'/locations/'+this.id;
+    this.url = settings.api+'locations/'+this.id;
 }
 Location.prototype = {
     put: function(d){
