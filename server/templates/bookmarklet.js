@@ -85,13 +85,11 @@ function eventFire(el, etype){
 var a = prompt('"send" or "sync"?');
 if (a == 'send'){
     var ls = get_locations();
-    if (ls && ls){
+    if (ls && ls.length){
         var p = 'Choose a destination: ' + ls.join(', ');
         var l = prompt(p);
-        if (l && p.indexOf(l) !== -1){
-            l = new Location(l);
-            l.save(String(document.location));
-        }
+        l = new Location(l);
+        l.save(String(document.location));
     }
     else {
         alert('No locations available.');

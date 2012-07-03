@@ -7,8 +7,6 @@ from . import app
 from .decorators import crossdomain
 
 pools = {
-    '1': [],
-    '2': [],
     '@pool': [],
 }
 
@@ -19,16 +17,26 @@ class LocationAPI(MethodView):
         if id is None:
             return json.dumps(pools.keys())
         else:
-            if id in pools:
-                return json.dumps(pools[id])
-            return json.dumps(None)
+            pool = pools.setdefault(id, [])[:]
+            pool.extend(pools['@pool'])
+            return json.dumps(pool)
 
     def put(self, id):
-        if id in pools:
-            if 'add' in request.form:
-                pools[id].append(request.form['add'])
-            if 'remove' in request.form:
-                pools[id].remove(request.form['remove'])
+        pool = pools.setdefault(id, [])
+        atpool = pools['@pool']
+        if 'add' in request.form:
+            url = request.form['add']
+            if url in pool:
+                return 'Already added', 200
+            pool.append(url)
+        if 'remove' in request.form:
+            url = request.form['remove']
+            if url not in pool+atpool:
+                return 'Not present', 200
+            elif url in pool:
+                pool.remove(url)
+            else:
+                atpool.remove(url)
         return '', 204
 
 location_api = LocationAPI.as_view('location_api')
