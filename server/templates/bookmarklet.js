@@ -33,7 +33,7 @@ function _XMLHttpRequest() {
 
 function get_locations(){
     var x = _XMLHttpRequest();
-    x.open(G, settings.api+'/locations/', false);
+    x.open(G, settings.api+'locations/', false);
     x.send();
     if (x.status == 200){
         var json = JSON.parse(x.responseText);
