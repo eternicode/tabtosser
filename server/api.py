@@ -11,7 +11,7 @@ pools = {
 }
 
 class LocationAPI(MethodView):
-    decorators = [crossdomain(origin='*')]
+    decorators = [crossdomain(origin='*', headers='origin, content-type')]
 
     def get(self, id=None):
         if id is None:

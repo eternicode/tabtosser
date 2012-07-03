@@ -53,6 +53,7 @@ Location.prototype = {
         s = s.join('&')
         var x = _XMLHttpRequest();
         x.open(U, this.url, false);
+        x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         x.send(s);
     },
     save: function(url){
